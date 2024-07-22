@@ -22,7 +22,7 @@ async function insertUser(
   });
   console.log(res);
 }
-insertUser("shorya@baj.com", "pass", "Shorya", "Baj");
+// insertUser("shorya@baj.com", "pass", "Shorya", "Baj");
 interface UpdateParams {
   firstName: string;
   lastName: string;
@@ -31,4 +31,17 @@ interface UpdateParams {
 async function updateUser(
   username: string,
   { firstName, lastName }: UpdateParams
-) {}
+) {
+  const res = await prisma.user.update({
+    where: { username: username },
+    data: {
+      firstName,
+      lastName,
+    },
+  });
+  console.log(res);
+}
+updateUser("shorya@baj.com", {
+  firstName: "shoryabaj",
+  lastName: "Messi",
+});
