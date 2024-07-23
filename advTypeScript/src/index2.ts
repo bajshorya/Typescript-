@@ -22,3 +22,14 @@ User.set("john@1", { name: "John", age: 21, email: "john@gmail.com" });
 
 const singleUser = User.get("baj@1");
 console.log(singleUser);
+
+// ''''''''''''''''''''Exclude ''''''''''''''''''''''''//
+//opposite of Pick 
+type EventType = "click" | "scroll" | "mousemove";
+type ExcludeEvent = Exclude<EventType, "scroll">; // 'click' | 'mousemove'
+
+const handleEvent = (event: ExcludeEvent) => {
+  console.log(`Handling event: ${event}`);
+};
+
+handleEvent("click"); // OK
