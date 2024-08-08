@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client/extension';
+import { PrismaClient } from '@prisma/client/edge';
 import { withAccelerate } from '@prisma/extension-accelerate';
 
 export interface Env {
@@ -12,6 +12,8 @@ export default {
 		}).$extends(withAccelerate());
 
 		try {
+			console.log('Request received:', request.method, request.url);
+
 			const response = await prisma.log.create({
 				data: {
 					level: 'Info',
@@ -22,7 +24,7 @@ export default {
 				},
 			});
 
-			console.log(JSON.stringify(response));
+			console.log('Database response:', JSON.stringify(response));
 			return new Response(`request method:${request.method}!`);
 		} catch (error) {
 			console.error('An error occurred:', error);
